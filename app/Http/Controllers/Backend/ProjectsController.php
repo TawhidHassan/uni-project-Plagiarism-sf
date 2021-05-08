@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\Project\StoreProjectRequest;
+use App\Http\Requests\Project\UpdateProjectRequest;
 
 class ProjectsController extends Controller
 {
@@ -16,9 +19,9 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        Gate::authorize('app.users.index');
-        $users = User::getAllUsers();
-        return view('backend.projects.index',compact('users'));
+        Gate::authorize('app.project.index');
+        $projects = Project::all();
+        return view('backend.projects.index',compact('projects'));
     }
 
     /**
@@ -28,7 +31,8 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('app.project.create');
+        return view('backend.projects.form');
     }
 
     /**
@@ -37,9 +41,9 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+        
     }
 
     /**
@@ -48,9 +52,9 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $Project)
     {
-        //
+        return view('backend.projects.show',compact('Project'));
     }
 
     /**
@@ -59,9 +63,10 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $Project)
     {
-        //
+        Gate::authorize('app.projects.edit');
+        return view('backend.projects.form', compact('Project'));
     }
 
     /**
@@ -71,7 +76,7 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request, $id)
     {
         //
     }
@@ -82,8 +87,11 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $Project)
     {
-        //
+        Gate::authorize('app.project.destroy');
+        $Project->delete();
+        notify()->success("Project Successfully Deleted", "Deleted");
+        return back();
     }
 }
