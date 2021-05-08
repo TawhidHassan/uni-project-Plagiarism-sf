@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Project;
 use App\Models\Module;
 use App\Models\Permission;
 use Illuminate\Database\Seeder;
@@ -160,6 +161,29 @@ class PermissionSeeder extends Seeder
             'module_id' => $moduleAppMenu->id,
             'name' => 'Delete Menu',
             'slug' => 'app.menus.destroy',
+        ]);
+
+        // project management
+        $moduleAppProject = Module::updateOrCreate(['name' => 'Project Management']);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppProject->id,
+            'name' => 'Access Projects',
+            'slug' => 'app.project.index',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppProject->id,
+            'name' => 'Create Project',
+            'slug' => 'app.project.create',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppProject->id,
+            'name' => 'Edit Project',
+            'slug' => 'app.project.edit',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppProject->id,
+            'name' => 'Delete Project',
+            'slug' => 'app.project.destroy',
         ]);
     }
 }
