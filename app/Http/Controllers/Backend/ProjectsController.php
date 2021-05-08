@@ -43,6 +43,20 @@ class ProjectsController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        $user = Project::create([
+            'members_names' => $request->members_names,
+            'project_name' => $request->project_name,
+            'project_discription' => $request->project_discription,
+            'team_name' => $request->team_name,
+            'status' => $request->filled('status'),
+            'batch' => $request->batch,
+            'supervisor' => $request->supervisor,
+    
+        ]);
+       
+       
+        notify()->success('Project Successfully Added.', 'Added');
+        return redirect()->route('app.project.index');
         
     }
 
@@ -52,9 +66,9 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $Project)
+    public function show(Project $project)
     {
-        return view('backend.projects.show',compact('Project'));
+        return view('backend.projects.show',compact('project'));
     }
 
     /**
@@ -63,10 +77,10 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $Project)
+    public function edit(Project $project)
     {
-        Gate::authorize('app.projects.edit');
-        return view('backend.projects.form', compact('Project'));
+        Gate::authorize('app.project.edit');
+        return view('backend.projects.form', compact('project'));
     }
 
     /**
@@ -76,9 +90,23 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProjectRequest $request, $id)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        
+        $project->update([
+            'members_names' => $request->members_names,
+            'project_name' => $request->project_name,
+            'project_discription' => $request->project_discription,
+            'team_name' => $request->team_name,
+            'status' => $request->filled('status'),
+            'batch' => $request->batch,
+            'supervisor' => $request->supervisor,
+    
+        ]);
+       
+       
+        notify()->success('Project Successfully Updated.', 'Added');
+        return redirect()->route('app.project.index');
     }
 
     /**

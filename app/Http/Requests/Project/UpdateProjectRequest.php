@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Project;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProjectRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        Gate::authorize('app.project.update');
+        Gate::authorize('app.project.edit');
         return true;
     }
 

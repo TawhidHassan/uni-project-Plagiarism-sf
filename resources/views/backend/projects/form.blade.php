@@ -31,8 +31,7 @@
     <div class="col-12">
         <!-- form start -->
         <form role="form" id="userFrom" method="POST"
-            action="{{ isset($project) ? route('app.project.update',$project->id) : route('app.project.store') }}"
-            enctype="multipart/form-data">
+            action="{{ isset($project) ? route('app.project.update',$project->id) : route('app.project.store') }}">
             @csrf
             @if(isset($project))
                 @method('PUT')
@@ -53,7 +52,9 @@
                                 value="{{ $project->project_discription ?? '' }}" />
 
                             <x-forms.textbox type="text" label="supervisor" name="supervisor"
-                                placeholder="supervisor" />
+                                placeholder="supervisor"
+                                value="{{ $project->supervisor ?? '' }}"
+                                />
 
 
                         </div>
@@ -66,13 +67,14 @@
                         <div class="card-body">
                             <h5 class="card-title">Select Role and Status</h5>
 
-                            <x-forms.textbox type="number" label="Batch" name="batch" placeholder="batch" />
+                            <x-forms.textbox type="number" label="Batch" name="batch" placeholder="batch"  value="{{ $project->batch ?? '' }}"/>
 
-                            <x-forms.textbox type="text" label="Team name" name="team_name" placeholder="team name" />
+                            <x-forms.textbox type="text" label="Team name" name="team_name" placeholder="team name" value="{{ $project->team_name ?? '' }}"/>
                             <x-forms.textbox type="text" label="Members Names" name="members_names"
-                                placeholder="Members Names" />
+                                placeholder="Members Names"
+                                value="{{ $project->members_names ?? '' }}" />
                             <x-forms.checkbox label="Status" name="status" class="custom-switch"
-                                :value="$user->status ?? null" />
+                                :value="$project->status ?? null" />
 
 
                             <x-forms.button label="Reset" class="btn-danger" icon-class="fas fa-redo"
