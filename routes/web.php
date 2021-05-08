@@ -34,6 +34,8 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace' => 'Backend','middleware'
     Route::resource('roles', 'RoleController')->except(['show']);
     Route::resource('users', 'UserController');
 
+    Route::resource('project', 'ProjectsController');
+
     // Backups
     Route::resource('backups', 'BackupController')->only(['index','store','destroy']);
     Route::get('backups/{file_name}', 'BackupController@download')->name('backups.download');
