@@ -19,15 +19,20 @@
                         identified within an organization.</p>
                 </div>
                 <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                    <form>
-                        <div class="column">
-                            <form action="/action_page.php">
-                                <textarea id="subject" name="subject"
+                    <form role="form" id="userFrom" method="POST" action="{{ route('app.search') }}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="name" name="project_name"
                                     placeholder="Enter text or Upload file to check for plagarism..."
-                                    style="height:170px;width: 900px;margin-left: -131px;"></textarea>
-                                <a href="Report.html"><button type="button" class="btn btn-info">Check For
-                                        Plagarism</button></a>
-                            </form>
+                                    style="height: 150px; width:500px"></textarea>
+                                <br />
+                                <x-forms.button label="Reset" class="btn-danger" icon-class="fas fa-redo"
+                                    on-click="resetForm('userFrom')" />
+
+
+                                <x-forms.button type="submit" label="Create" icon-class="fas fa-plus-circle" />
+                            </div>
                         </div>
                     </form>
                 </div>

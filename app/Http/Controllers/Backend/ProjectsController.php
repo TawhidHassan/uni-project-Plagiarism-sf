@@ -122,4 +122,18 @@ class ProjectsController extends Controller
         notify()->success("Project Successfully Deleted", "Deleted");
         return back();
     }
+
+
+    public function searchProject(Request $request)
+	{
+		if($request->isMethod('post')){
+			$data = $request->all();
+            $search_project = $data['project_name'];
+            // print_r($search_project);
+            $productsAll = Project::where('project_name','like','%'.$search_project.'%')->where('status',1)->get();
+            // print_r($productsAll);
+           
+            return view('searchRajelt')->with(compact('productsAll')); 
+        }
+    }
 }

@@ -26,6 +26,13 @@ Route::group(['as'=>'login.','prefix'=>'login','namespace'=>'Auth'], function ()
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+
+
+
+
+
+
 // Backend
 Route::group(['as'=>'app.','prefix'=>'app','namespace' => 'Backend','middleware' => ['auth']], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
@@ -35,7 +42,11 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace' => 'Backend','middleware'
     Route::resource('users', 'UserController');
 
     Route::resource('project', 'ProjectsController');
+    // Search project
+    Route::post('/search-project','ProjectsController@searchProject')->name('search');
 
+
+    
     // Backups
     Route::resource('backups', 'BackupController')->only(['index','store','destroy']);
     Route::get('backups/{file_name}', 'BackupController@download')->name('backups.download');
