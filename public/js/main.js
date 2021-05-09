@@ -1,20 +1,19 @@
 
 $(document).ready(function(){
 
-	$("#btn").on('click',function(){
-	alert("ssss ")
-
-    });
+	var query;
 
 
-    $("#projectName").keyup(function(){
-        var text = $(this).val();
-        
-    });
+    
+
+    $("#reset").on('click',function(){
+        $("#projectName").val('');
+        query=""
+        });
 
     $("#result").hide()
     $("#projectName").keyup(function(){
-        var query = $(this).val();
+         query = $(this).val();
         if(query==""){
             $("#result").hide()
         }
@@ -33,7 +32,7 @@ $(document).ready(function(){
                     for(var i=0;i<jsonData.length;i++){
                         // console.log(jsonData[i]["project_name"])
                        var text=jsonData[i]["project_name"]
-                       x += "<h6>"+"<b>"+i+"</b>"+" "+ text + "</h6>";  
+                       x += "<h5>"+"<b>"+i+"</b>"+" "+ text + "</h5>"+"<br><hr>";  
                     }
                     document.getElementById("listRes").innerHTML = x;
                     

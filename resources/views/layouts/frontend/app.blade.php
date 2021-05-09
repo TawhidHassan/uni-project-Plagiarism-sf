@@ -26,6 +26,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/frontend.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>       
+        hr{
+            height: 1px;
+            background-color: #ccc;
+            border: none;
+        }
+    </style>
 </head>
 <body>
     <div id="app">

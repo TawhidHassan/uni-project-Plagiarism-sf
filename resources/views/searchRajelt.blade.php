@@ -11,7 +11,7 @@
                 
                 <ul style="color: rgb(240, 204, 3); margin-left: 90px;font-size: 18px;font-weight: bolder;">
                     <li> Significant plagiarism found
-                        Ensure your work is fresh and original by checking it against 16 billion web pages. </li><br>
+                        Ensure your work is fresh and original by checking it against EUB thesis DataBase. </li><br>
                         @foreach($productsAll as $key=>$project)
                             <li>{{$project->project_name}}</li>
                         @endforeach

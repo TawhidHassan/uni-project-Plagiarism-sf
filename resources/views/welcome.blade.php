@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-
+    
     <!-- Masthead-->
     <header class="masthead text-white text-center">
         <div class="overlay"></div>
@@ -27,21 +27,21 @@
                                     placeholder="Enter text or Upload file to check for plagarism..."
                                     style="height: 150px; width:500px"></textarea>
                                 <br />
-                                <x-forms.button label="Reset" class="btn-danger" icon-class="fas fa-redo"
-                                    on-click="resetForm('userFrom')" />
+                                <button type="button" label="Reset" class="btn btn-danger" 
+                                   id="reset"><i class="fas fa-redo"></i>Reset</button>
 
 
-                                <x-forms.button type="submit" label="Create" icon-class="fas fa-plus-circle" />
+                                <x-forms.button type="submit" label="Check" icon-class="fas fa-plus-circle" />
                             </div>
                         </div>
                     </form>
                 </div>
-                <ul style="color: rgb(240, 204, 3); margin-left: 90px;font-size: 18px;font-weight: bolder;" id="result">
+                <div style="color: rgb(240, 204, 3); margin-left: 90px;font-size: 18px;font-weight: bolder;" id="result">
                     <h2>Significant plagiarism found
-                        Ensure your work is fresh and original by checking it against 16 billion web pages. </h2><br><hr>
-                    <li id="listRes"> Spelling </li> <br>
+                        Ensure your work is fresh and original by checking it against EUB thesis DataBase. </h2><br><hr>
+                    <span style="text-align: center" id="listRes">  </span> 
                     
-                </ul>
+                    </div>
             </div>
         </div>
     </header>
