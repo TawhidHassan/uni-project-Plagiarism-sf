@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
 
@@ -136,4 +138,11 @@ class ProjectsController extends Controller
             return view('searchRajelt')->with(compact('productsAll')); 
         }
     }
+
+    public function searching($query){
+        
+        $productsAll = Project::where('project_name','like','%'.$query.'%')->where('status',1)->get('project_name');
+        echo $productsAll;
+    }
+
 }

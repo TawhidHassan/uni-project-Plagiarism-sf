@@ -44,7 +44,7 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace' => 'Backend','middleware'
     Route::resource('project', 'ProjectsController');
     // Search project
     Route::post('/search-project','ProjectsController@searchProject')->name('search');
-
+    Route::get('/searching/{query}','ProjectsController@searching')->name('searching');
 
     
     // Backups

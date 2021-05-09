@@ -23,7 +23,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
-                                <textarea id="name" name="project_name"
+                                <textarea id="projectName" name="project_name"
                                     placeholder="Enter text or Upload file to check for plagarism..."
                                     style="height: 150px; width:500px"></textarea>
                                 <br />
@@ -36,16 +36,11 @@
                         </div>
                     </form>
                 </div>
-                <ul style="color: rgb(240, 204, 3); margin-left: 90px;font-size: 18px;font-weight: bolder;">
-                    <li> Significant plagiarism found
-                        Ensure your work is fresh and original by checking it against 16 billion web pages. </li><br>
-                    <li> Spelling </li> <br>
-                    <li> Correct </li> <br>
-                    <li> Punctuation </li> <br>
-                    <li> Conciseness </li> <br>
-                    <li> Readability </li> <br>
-                    <li> Word choice </li> <br>
-                    <li> Additional writing issues </li> <br>
+                <ul style="color: rgb(240, 204, 3); margin-left: 90px;font-size: 18px;font-weight: bolder;" id="result">
+                    <h2>Significant plagiarism found
+                        Ensure your work is fresh and original by checking it against 16 billion web pages. </h2><br><hr>
+                    <li id="listRes"> Spelling </li> <br>
+                    
                 </ul>
             </div>
         </div>
