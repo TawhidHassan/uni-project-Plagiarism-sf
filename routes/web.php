@@ -26,7 +26,9 @@ Route::group(['as'=>'login.','prefix'=>'login','namespace'=>'Auth'], function ()
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+Route::get('/searchDescription', function () {
+    return view('searchByDescription');
+})->name('search description');
 
 
 
@@ -44,7 +46,9 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace' => 'Backend','middleware'
     Route::resource('project', 'ProjectsController');
     // Search project
     Route::post('/search-project','ProjectsController@searchProject')->name('search');
+    Route::post('/search-project-description','ProjectsController@searchDescription')->name('searchDescription');
     Route::get('/searching/{query}','ProjectsController@searching')->name('searching');
+    Route::get('/searchingDes/{query}','ProjectsController@searchingDes')->name('searchingDes');
 
     
     // Backups

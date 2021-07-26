@@ -27,9 +27,10 @@
                                     placeholder="Enter text or Upload file to check for plagarism..."
                                     style="height: 150px; width:500px"></textarea>
                                 <br />
+                                <a href="{{ url('/searchDescription') }}" type="button" label="Reset" class="btn btn-secondary"
+                                        id="reset"><i class="fas fa-search"></i>Search By Description</a>
                                 <button type="button" label="Reset" class="btn btn-danger" 
                                    id="reset"><i class="fas fa-redo"></i>Reset</button>
-
 
                                 <x-forms.button type="submit" label="Check" icon-class="fas fa-plus-circle" />
                             </div>

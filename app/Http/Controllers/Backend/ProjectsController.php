@@ -139,9 +139,28 @@ class ProjectsController extends Controller
         }
     }
 
+    public function searchDescription(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->all();
+            $search_project = $data['project_des'];
+            // print_r($search_project);
+            $productsAll = Project::where('project_discription','like','%'.$search_project.'%')->where('status',1)->get();
+            // print_r($productsAll);
+
+            return view('searchRajelt')->with(compact('productsAll'));
+        }
+    }
+
     public function searching($query){
         
         $productsAll = Project::where('project_name','like','%'.$query.'%')->where('status',1)->get('project_name');
+        echo $productsAll;
+    }
+
+public function searchingDes($query){
+
+        $productsAll = Project::where('project_discription','like','%'.$query.'%')->where('status',1)->get('project_name');
         echo $productsAll;
     }
 
