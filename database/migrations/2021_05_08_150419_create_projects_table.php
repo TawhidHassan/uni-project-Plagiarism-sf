@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('members_names');
             $table->boolean('status')->default(false);
             $table->string('project_name');
-            $table->string('project_discription');
+            $table->longText('project_discription');
             $table->string('supervisor');
             $table->string('batch');
             $table->timestamps();

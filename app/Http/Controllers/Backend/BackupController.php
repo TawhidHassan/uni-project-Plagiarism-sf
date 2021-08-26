@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 class BackupController extends Controller
@@ -24,8 +24,8 @@ class BackupController extends Controller
         $files = $disk->files(config('backup.backup.name'));
 
         $backups = [];
-        // make an array of backup files, with their filesize and creation date
-        foreach ($files as $k => $f) {
+         // make an array of backup files, with their filesize and creation date
+         foreach ($files as $k => $f) {
             // only take the zip files into account
             if (substr($f, -4) == '.zip' && $disk->exists($f)) {
                 $file_name = str_replace(config('backup.backup.name') . '/', '', $f);
@@ -34,7 +34,8 @@ class BackupController extends Controller
                     'file_name' => $file_name,
                     'file_size' => $this->bytesToHuman($disk->size($f)),
                     'created_at' => Carbon::parse($disk->lastModified($f))->diffForHumans(),
-                    'download_link' => action('Backend\BackupController@download', [$file_name]),
+                    'download_link' => action([BackupController::class,'download'], [$file_name]),
+                    // action('Backend\BackupController@download', [$file_name])
                 ];
             }
         }
@@ -44,7 +45,7 @@ class BackupController extends Controller
         return view('backend.backups',compact('backups'));
     }
 
-    /**
+ /**
      * Convert bytes to human readable
      * @param $bytes
      * @return string
@@ -59,6 +60,8 @@ class BackupController extends Controller
 
         return round($bytes, 2) . ' ' . $units[$i];
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -78,16 +81,18 @@ class BackupController extends Controller
      */
     public function store(Request $request)
     {
+        // http://localhost/laraStarter/public/app/backups set browser route like this
         Gate::authorize('app.backups.create');
         // start the backup process
         Artisan::call('backup:run');
 
         notify()->success('Backup Created Successfully.', 'Added');
         return back();
-
     }
 
-    /**
+
+
+     /**
      * Downloads a backup zip file.
      *
      * @param  int  $file_name
@@ -111,6 +116,9 @@ class BackupController extends Controller
             ]);
         }
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -149,8 +157,8 @@ class BackupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $file_name
-     * @return void
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($file_name)
     {
@@ -164,7 +172,7 @@ class BackupController extends Controller
         return back();
     }
 
-    /**
+     /**
      * Clean all old backups
      * @return \Illuminate\Http\RedirectResponse
      */
